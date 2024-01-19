@@ -1,0 +1,218 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <title>School Store</title>
+    <style>
+    #myForm {
+      display: none;
+    }
+
+
+    #showFormButton {
+
+    }
+    </style>
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{%  static 'assets/css/templatemo-grad-school.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/lightbox.css' %}">
+
+
+  <!--header-->
+   </head>
+<header class="main-header clearfix" role="header">
+    <div class="logo">
+      <a href="#"><em>School</em> Store</a>
+    </div>
+    <a href="#menu" class="menu-link"><i class="fa fa-bars"></i></a>
+    <nav id="menu" class="main-nav" role="navigation">
+      <ul class="main-menu">
+        <li><a href="{% url 'schoolapp:home' %}">Home</a></li>
+      </ul>
+    </nav>
+  </header>
+<body>
+<section class="section coming-soon" data-section="section3">
+<div class="container" style="text-align: center;">
+    <div class="top-content">
+        <h6 style="text-align:center">Please fill the form below</h6>
+    </div>
+<section class="section main-banner" id="top" data-section="section1">
+      <video autoplay muted loop id="bg-video">
+          <source src="{% static 'assets/images/course.jpg' %}" alt="">
+      </video>
+
+      <div class="video-overlay header-text">
+          <div class="caption" alt="">
+              <h6>School of Management</h6>
+              <h2><em>Your</em> Classroom</h2>
+               <h3 style="color: white;">Please Click here to fill the form</h3>
+              <div class="main-button">
+                <button onclick="toggleForm()" style=" padding: 20px 40px;font-size: 16px;cursor: pointer;background-color:orange;color: white;">Show Form</button>
+              </div>
+          </div>
+      </div>
+  </section>
+
+    <form id="myForm" action="{% url 'submit_form' %}" method="POST">
+        {% csrf_token %}
+        <div class="col-md-12">
+            <fieldset>
+                <input type="text" class="form-control" id="name" placeholder="Name" required="">
+            </fieldset>
+        </div>
+        <br>
+        <div class="col-md-12">
+            <fieldset>
+                <input type="date" class="form-control" id="dob" placeholder="Date of Birth" required="">
+            </fieldset>
+        </div>
+        <br>
+        <div class="col-md-12">
+            <fieldset>
+                <input type="number" class="form-control" id="Age" placeholder="Age" required="">
+            </fieldset>
+        </div>
+        <br>
+        <div class="col-md-12">
+            <fieldset>
+                <select class="form-control" id="name" name="name" required="">
+                    <option value="" disabled selected>Select your Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Othes">Others</option>
+                            <!-- Add more options as needed -->
+                </select>
+            </fieldset><br>
+        </div>
+        <div class="col-md-12">
+            <fieldset>
+                <input type="phonenumber" class="form-control" id="phonenumber" placeholder="Phone Number" required="">
+            </fieldset>
+        </div>
+        <br>
+        <div class="col-md-12">
+            <fieldset>
+                <input type="email" class="form-control" id="Email id" placeholder="Email id" required="">
+            </fieldset>
+        </div>
+        <br>
+        <div class="col-md-12">
+            <fieldset>
+                <input type="text" class="form-control" id="Address" placeholder="Address" required="">
+            </fieldset>
+        </div>
+        <br>
+        <div class="col-md-12">
+            <fieldset>
+                <select name="department_id" id="department_id" class="form-control">
+                    <option value="">Select your Department</option>
+                    {% for i in departments %}
+                        <option value="{{ i.id }}">{{ i.name }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+            </fieldset>
+        </div>
+        <br>
+        <div class="col-md-12">
+            <fieldset>
+                <select name="course" id="course" class="form-control">
+                    <option>Select Courses</option>
+                        {% for i in courses %}
+                        <option value="{{ i.id }}">{{ i.name }}</option>
+                         {% endfor %}
+                </select>
+                <br>
+            </fieldset>
+         </div>
+        <br>
+        <div class="col-md-12">
+            <fieldset>
+            <select class="form-control" id="purpose" name="purpose" required="">
+                    <option value="">Select your Purpose</option>
+                    <option value="enquiry">For Enquiry</option>
+                    <option value="placeOrder">Place Order</option>
+                    <option value="returnOrder">Return Order</option>
+            </select>
+            </fieldset>
+            <br>
+         </div>
+        <div class="col-md-12">
+            <p style="color: white;font-size: 18px;">Materials:</p>
+            {% for material in materials %}
+                <div class="form-check form-check-inline" style="color: white;width:150px;">
+                <input class="form-check-input" type="checkbox" name="materials" id="material_{{ material.id }}" value="">
+                <label class="form-check-label" for="material_{{ material.id }}">{{ material.name }}</label>
+                </div>
+            {% endfor %}
+         </div>
+        <br>
+        <div class="col-md-12">
+            <fieldset>
+                <button type="submit" id="form-submit" class="Submit" >Submit</button>
+            </fieldset>
+        </div>
+</div>
+    </form>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    function toggleForm() {
+      var form = document.getElementById("myForm");
+      form.style.display = (form.style.display === "none") ? "block" : "none";
+    }
+    $(document).ready(function() {
+        // Function to handle the change event on the department dropdown
+        $('#department_id').change(function() {
+            var departmentId = $(this).val();
+
+            // Make an AJAX request to fetch courses based on the selected department
+            $.ajax({
+                type: 'POST',
+                url: '{% url "sampleform" %}',
+                data: {
+                    'department_id': departmentId,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                },
+                success: function(data) {
+                    var coursesDropdown = $('#course');
+                    coursesDropdown.empty();
+
+                    // Populate the courses dropdown with the retrieved data
+                    $.each(data.courses, function(index, course) {
+                        coursesDropdown.append($('<option>').val(course.id).text(course.name));
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX error:', status, error);
+                }
+            });
+        });
+
+      });
+</script>
+
+</section>
+
+</body>
+<footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+            <p><i class="fa fa-copyright"></i> Copyright 2024 by School Store</p></div>
+      </div>
+    </div>
+  </footer>
+</html>

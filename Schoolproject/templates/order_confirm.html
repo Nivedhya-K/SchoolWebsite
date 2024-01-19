@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <title>School Store</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{%  static 'assets/css/templatemo-grad-school.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/lightbox.css' %}">
+<!--
+
+TemplateMo 557 Grad School
+
+https://templatemo.com/tm-557-grad-school
+
+-->
+  </head>
+  <!--header-->
+  <header class="main-header clearfix" role="header">
+    <div class="logo">
+      <a href="#"><em>School</em> Store</a>
+    </div>
+    <a href="#menu" class="menu-link"><i class="fa fa-bars"></i></a>
+    <nav id="menu" class="main-nav" role="navigation">
+      <ul class="main-menu">
+        <li><a href="{% url 'home' %}">Home</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  </head>
+<body>
+ <section class="section main-banner" id="top" data-section="section1">
+      <video autoplay muted loop id="bg-video">
+          <source src="{% static 'assets/images/course.jpg' %}" alt="">
+      </video>
+
+      <div class="video-overlay header-text">
+          <div class="caption">
+              <h6>Graduate School of Management</h6>
+              <body>
+                {% if message %}
+                    <h3>{{ message }}</h3>
+                {% endif %}
+              </body>
+              <div class="main-button">
+                  <div class="scroll-to-section"><a href="{% url 'schoolapp:home' %}">BACK TO HOME</a></div>
+              </div>
+          </div>
+      </div>
+  </section>
+<footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+            <p><i class="fa fa-copyright"></i> Copyright 2024 by School Store</p></div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
